@@ -5,17 +5,20 @@ class TaskCubit extends Cubit<List<Task>> {
   TaskCubit() : super([]);
 
   void addTask(Task task) {
-    state.add(task);
-    emit(List.from(state));
+    if (task.name.trim().isEmpty) return;
+    final newState = List<Task>.from(state)..add(task);
+    emit(newState);
   }
 
   void toggleTask(int index) {
-    state[index].isDone = !state[index].isDone;
-    emit(List.from(state));
+    final task = state[index];
+    final updatedTask = task.copyWith(isDone: !task.isDone);
+    final newState = List<Task>.from(state)..[index] = updatedTask;
+    emit(newState);
   }
 
   void deleteTask(int index) {
-    state.removeAt(index);
-    emit(List.from(state));
+    final newState = List<Task>.from(state)..removeAt(index);
+    emit(newState);
   }
 }

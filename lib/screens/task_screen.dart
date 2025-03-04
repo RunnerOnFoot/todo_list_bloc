@@ -9,6 +9,7 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final taskCubit = context.read<TaskCubit>();
+    final TextEditingController taskController = TextEditingController();
     return Scaffold(
       appBar: AppBar(title: const Text('To-Do List')),
       body: Column(
@@ -20,13 +21,13 @@ class TaskScreen extends StatelessWidget {
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      onLongPress: () {
+                        taskCubit.deleteTask(index);
+                      },
                       title: Text(tasks[index].name),
                       trailing: IconButton(
                         onPressed: () {
                           taskCubit.toggleTask(index);
-                        },
-                        onLongPress: () {
-                          taskCubit.deleteTask(index);
                         },
                         icon: Icon(
                           tasks[index].isDone
@@ -43,8 +44,10 @@ class TaskScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
+              controller: taskController,
               onSubmitted: (taskName) {
                 taskCubit.addTask(Task(name: taskName));
+                taskController.clear();
               },
               decoration: const InputDecoration(
                 hintText: 'Add a task...',
