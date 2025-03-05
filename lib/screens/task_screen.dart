@@ -1,61 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_list_bloc/cubits/task_cubit.dart';
-import 'package:to_do_list_bloc/models/task.dart';
+import '../blocs/task_bloc.dart';
+import '../blocs/task_event.dart';
+import '../blocs/task_state.dart';
+import '../models/task.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final taskCubit = context.read<TaskCubit>();
-    final TextEditingController taskController = TextEditingController();
+    final taskBloc = context.read<TaskBloc>();
+
     return Scaffold(
       appBar: AppBar(title: const Text('To-Do List')),
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<TaskCubit, List<Task>>(
-              builder: (context, tasks) {
-                return ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onLongPress: () {
-                        taskCubit.deleteTask(index);
-                      },
-                      title: Text(tasks[index].name),
-                      trailing: IconButton(
-                        onPressed: () {
-                          taskCubit.toggleTask(index);
-                        },
-                        icon: Icon(
-                          tasks[index].isDone
-                              ? Icons.check_box
-                              : Icons.check_box_outline_blank,
-                        ),
-                      ),
-                    );
+      body: BlocBuilder<TaskBloc, TaskState>(
+        builder: (context, state) {
+          return ListView.builder(
+            itemCount: state.tasks.length,
+            itemBuilder: (context, index) {
+              final task = state.tasks[index];
+              return ListTile(
+                onLongPress: () {
+                  taskBloc.add(DeleteTask(index));
+                },
+                title: Text(task.name),
+                trailing: IconButton(
+                  onPressed: () {
+                    taskBloc.add(ToggleTask(index));
                   },
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: taskController,
-              onSubmitted: (taskName) {
-                taskCubit.addTask(Task(name: taskName));
-                taskController.clear();
-              },
-              decoration: const InputDecoration(
-                hintText: 'Add a task...',
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-        ],
+
+                  icon: Icon(
+                    task.isDone
+                        ? Icons.check_box
+                        : Icons.check_box_outline_blank,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          taskBloc.add(AddTask(Task(name: 'New Task')));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
