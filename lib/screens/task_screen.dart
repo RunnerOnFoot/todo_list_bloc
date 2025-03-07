@@ -11,6 +11,7 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final taskBloc = context.read<TaskBloc>();
+    final TextEditingController taskController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: const Text('To-Do List')),
@@ -43,7 +44,39 @@ class TaskScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          taskBloc.add(AddTask(Task(name: 'New Task')));
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Add Task'),
+                content: TextField(
+                  controller: taskController,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter task name',
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      final taskName = taskController.text;
+                      if (taskName.isNotEmpty) {
+                        taskBloc.add(AddTask(Task(name: taskName)));
+                        taskController.clear();
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: const Text('Add'),
+                  ),
+                ],
+              );
+            },
+          );
         },
         child: const Icon(Icons.add),
       ),

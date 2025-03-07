@@ -11,4 +11,12 @@ class Task {
   Task toggleDone() {
     return copyWith(isDone: !isDone);
   }
+
+  Map<String, dynamic> toJson() {
+    return {'name': name, 'isDone': isDone};
+  }
+
+  factory Task.fromJson(Map<String, dynamic> json) {
+    return Task(name: json['name'], isDone: json['isDone']);
+  }
 }
