@@ -5,7 +5,8 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:to_do_list_bloc/service_locator.dart';
 import 'blocs/task_bloc.dart';
-import 'screens/task_screen.dart';
+import 'screens/task_list_screen.dart';
+import 'screens/task_edit_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,14 +31,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<TaskBloc>(), // Inject TaskBloc with GetIt
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: TaskScreen()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const TaskListScreen(),
+          '/edit': (context) => const TaskEditScreen(),
+        },
+      ),
     );
   }
 }
-
-// routes: {
-// Task.id: (context) => Task(),
-// AddTaskScreen.id: (context) => AddTaskScreen(),
-// EditTaskScreen.id: (context) => EditTaskScreen(),
-// DeleteTaskScreen.id: (context) => DeleteTaskScreen(),
-// },
