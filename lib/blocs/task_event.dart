@@ -1,34 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:to_do_list_bloc/models/task.dart';
 
-abstract class TaskEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+part 'task_event.freezed.dart';
 
-class AddTask extends TaskEvent {
-  final Task task;
+@freezed
+sealed class TaskEvent with _$TaskEvent {
+  const factory TaskEvent.added(Task task) = TaskAdded;
 
-  AddTask(this.task);
+  const factory TaskEvent.removed(int index) = TaskRemoved;
 
-  @override
-  List<Object?> get props => [task];
-}
-
-class ToggleTask extends TaskEvent {
-  final int index;
-
-  ToggleTask(this.index);
-
-  @override
-  List<Object?> get props => [index];
-}
-
-class DeleteTask extends TaskEvent {
-  final int index;
-
-  DeleteTask(this.index);
-
-  @override
-  List<Object?> get props => [index];
+  const factory TaskEvent.updated(int index, Task newTask) = TaskUpdated;
 }

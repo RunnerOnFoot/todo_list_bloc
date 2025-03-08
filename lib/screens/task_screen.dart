@@ -23,12 +23,14 @@ class TaskScreen extends StatelessWidget {
               final task = state.tasks[index];
               return ListTile(
                 onLongPress: () {
-                  taskBloc.add(DeleteTask(index));
+                  taskBloc.add(TaskRemoved(index));
                 },
                 title: Text(task.name),
                 trailing: IconButton(
                   onPressed: () {
-                    taskBloc.add(ToggleTask(index));
+                    taskBloc.add(
+                      TaskUpdated(index, task.copyWith(isDone: !task.isDone)),
+                    );
                   },
 
                   icon: Icon(
@@ -66,7 +68,7 @@ class TaskScreen extends StatelessWidget {
                     onPressed: () {
                       final taskName = taskController.text;
                       if (taskName.isNotEmpty) {
-                        taskBloc.add(AddTask(Task(name: taskName)));
+                        taskBloc.add(TaskAdded(Task(name: taskName)));
                         taskController.clear();
                         Navigator.of(context).pop();
                       }
