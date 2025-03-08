@@ -12,7 +12,9 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
 
     on<ToggleTask>((event, emit) {
       final updatedTasks = List<Task>.from(state.tasks);
-      updatedTasks[event.index].toggleDone();
+      updatedTasks[event.index] = updatedTasks[event.index].copyWith(
+        isDone: !updatedTasks[event.index].isDone,
+      );
       emit(TaskState(tasks: updatedTasks));
     });
 
@@ -24,20 +26,11 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
 
   @override
   TaskState? fromJson(Map<String, dynamic> json) {
-    final tasks =
-        (json['tasks'] as List)
-            .map((task) => Task(name: task['name'], isDone: task['isDone']))
-            .toList();
-    return TaskState(tasks: tasks);
+    return TaskState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(TaskState state) {
-    return {
-      'tasks':
-          state.tasks
-              .map((task) => {'name': task.name, 'isDone': task.isDone})
-              .toList(),
-    };
+    return state.toJson();
   }
 }

@@ -1,22 +1,12 @@
-class Task {
-  final String name;
-  final bool isDone;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Task({required this.name, this.isDone = false});
+part 'task.freezed.dart';
+part 'task.g.dart';
 
-  Task copyWith({String? name, bool? isDone}) {
-    return Task(name: name ?? this.name, isDone: isDone ?? this.isDone);
-  }
+@freezed
+class Task with _$Task {
+  const factory Task({required String name, @Default(false) bool isDone}) =
+      _Task;
 
-  Task toggleDone() {
-    return copyWith(isDone: !isDone);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'name': name, 'isDone': isDone};
-  }
-
-  factory Task.fromJson(Map<String, dynamic> json) {
-    return Task(name: json['name'], isDone: json['isDone']);
-  }
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }

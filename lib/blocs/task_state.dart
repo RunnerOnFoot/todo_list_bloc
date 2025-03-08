@@ -1,22 +1,13 @@
 import 'package:to_do_list_bloc/models/task.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class TaskState extends Equatable {
-  final List<Task> tasks;
+part 'task_state.freezed.dart';
+part 'task_state.g.dart';
 
-  const TaskState({this.tasks = const []});
+@freezed
+class TaskState with _$TaskState {
+  const factory TaskState({@Default([]) List<Task> tasks}) = _TaskState;
 
-  @override
-  List<Object?> get props => [tasks];
-
-  Map<String, dynamic> toJson() {
-    return {'tasks': tasks.map((task) => task.toJson()).toList()};
-  }
-
-  factory TaskState.fromJson(Map<String, dynamic> json) {
-    return TaskState(
-      tasks:
-          (json['tasks'] as List).map((task) => Task.fromJson(task)).toList(),
-    );
-  }
+  factory TaskState.fromJson(Map<String, dynamic> json) =>
+      _$TaskStateFromJson(json);
 }
