@@ -5,9 +5,10 @@ part 'task_event.freezed.dart';
 
 @freezed
 sealed class TaskEvent with _$TaskEvent {
-  const factory TaskEvent.added(Task task) = TaskAdded;
+  const factory TaskEvent.added(Task task) = TaskEvent$TaskAdded;
 
-  const factory TaskEvent.removed(int index) = TaskRemoved;
+  const factory TaskEvent.removed(int index) = TaskEvent$TaskRemoved;
 
-  const factory TaskEvent.updated(int index, Task newTask) = TaskUpdated;
+  const factory TaskEvent.updated(int index, Task newTask) =
+      TaskEvent$TaskUpdated;
 }

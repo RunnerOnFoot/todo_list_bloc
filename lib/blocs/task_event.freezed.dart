@@ -45,8 +45,8 @@ $TaskEventCopyWith(TaskEvent _, $Res Function(TaskEvent) __);
 /// @nodoc
 
 
-class TaskAdded implements TaskEvent {
-  const TaskAdded(this.task);
+class TaskEvent$TaskAdded implements TaskEvent {
+  const TaskEvent$TaskAdded(this.task);
   
 
  final  Task task;
@@ -55,13 +55,13 @@ class TaskAdded implements TaskEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$TaskAddedCopyWith<TaskAdded> get copyWith => _$TaskAddedCopyWithImpl<TaskAdded>(this, _$identity);
+$TaskEvent$TaskAddedCopyWith<TaskEvent$TaskAdded> get copyWith => _$TaskEvent$TaskAddedCopyWithImpl<TaskEvent$TaskAdded>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskAdded&&(identical(other.task, task) || other.task == task));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskEvent$TaskAdded&&(identical(other.task, task) || other.task == task));
 }
 
 
@@ -77,8 +77,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $TaskAddedCopyWith<$Res> implements $TaskEventCopyWith<$Res> {
-  factory $TaskAddedCopyWith(TaskAdded value, $Res Function(TaskAdded) _then) = _$TaskAddedCopyWithImpl;
+abstract mixin class $TaskEvent$TaskAddedCopyWith<$Res> implements $TaskEventCopyWith<$Res> {
+  factory $TaskEvent$TaskAddedCopyWith(TaskEvent$TaskAdded value, $Res Function(TaskEvent$TaskAdded) _then) = _$TaskEvent$TaskAddedCopyWithImpl;
 @useResult
 $Res call({
  Task task
@@ -89,17 +89,17 @@ $TaskCopyWith<$Res> get task;
 
 }
 /// @nodoc
-class _$TaskAddedCopyWithImpl<$Res>
-    implements $TaskAddedCopyWith<$Res> {
-  _$TaskAddedCopyWithImpl(this._self, this._then);
+class _$TaskEvent$TaskAddedCopyWithImpl<$Res>
+    implements $TaskEvent$TaskAddedCopyWith<$Res> {
+  _$TaskEvent$TaskAddedCopyWithImpl(this._self, this._then);
 
-  final TaskAdded _self;
-  final $Res Function(TaskAdded) _then;
+  final TaskEvent$TaskAdded _self;
+  final $Res Function(TaskEvent$TaskAdded) _then;
 
 /// Create a copy of TaskEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? task = null,}) {
-  return _then(TaskAdded(
+  return _then(TaskEvent$TaskAdded(
 null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
 as Task,
   ));
@@ -120,8 +120,8 @@ $TaskCopyWith<$Res> get task {
 /// @nodoc
 
 
-class TaskRemoved implements TaskEvent {
-  const TaskRemoved(this.index);
+class TaskEvent$TaskRemoved implements TaskEvent {
+  const TaskEvent$TaskRemoved(this.index);
   
 
  final  int index;
@@ -130,13 +130,13 @@ class TaskRemoved implements TaskEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$TaskRemovedCopyWith<TaskRemoved> get copyWith => _$TaskRemovedCopyWithImpl<TaskRemoved>(this, _$identity);
+$TaskEvent$TaskRemovedCopyWith<TaskEvent$TaskRemoved> get copyWith => _$TaskEvent$TaskRemovedCopyWithImpl<TaskEvent$TaskRemoved>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskRemoved&&(identical(other.index, index) || other.index == index));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskEvent$TaskRemoved&&(identical(other.index, index) || other.index == index));
 }
 
 
@@ -152,8 +152,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $TaskRemovedCopyWith<$Res> implements $TaskEventCopyWith<$Res> {
-  factory $TaskRemovedCopyWith(TaskRemoved value, $Res Function(TaskRemoved) _then) = _$TaskRemovedCopyWithImpl;
+abstract mixin class $TaskEvent$TaskRemovedCopyWith<$Res> implements $TaskEventCopyWith<$Res> {
+  factory $TaskEvent$TaskRemovedCopyWith(TaskEvent$TaskRemoved value, $Res Function(TaskEvent$TaskRemoved) _then) = _$TaskEvent$TaskRemovedCopyWithImpl;
 @useResult
 $Res call({
  int index
@@ -164,17 +164,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$TaskRemovedCopyWithImpl<$Res>
-    implements $TaskRemovedCopyWith<$Res> {
-  _$TaskRemovedCopyWithImpl(this._self, this._then);
+class _$TaskEvent$TaskRemovedCopyWithImpl<$Res>
+    implements $TaskEvent$TaskRemovedCopyWith<$Res> {
+  _$TaskEvent$TaskRemovedCopyWithImpl(this._self, this._then);
 
-  final TaskRemoved _self;
-  final $Res Function(TaskRemoved) _then;
+  final TaskEvent$TaskRemoved _self;
+  final $Res Function(TaskEvent$TaskRemoved) _then;
 
 /// Create a copy of TaskEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? index = null,}) {
-  return _then(TaskRemoved(
+  return _then(TaskEvent$TaskRemoved(
 null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -186,8 +186,8 @@ as int,
 /// @nodoc
 
 
-class TaskUpdated implements TaskEvent {
-  const TaskUpdated(this.index, this.newTask);
+class TaskEvent$TaskUpdated implements TaskEvent {
+  const TaskEvent$TaskUpdated(this.index, this.newTask);
   
 
  final  int index;
@@ -197,13 +197,13 @@ class TaskUpdated implements TaskEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$TaskUpdatedCopyWith<TaskUpdated> get copyWith => _$TaskUpdatedCopyWithImpl<TaskUpdated>(this, _$identity);
+$TaskEvent$TaskUpdatedCopyWith<TaskEvent$TaskUpdated> get copyWith => _$TaskEvent$TaskUpdatedCopyWithImpl<TaskEvent$TaskUpdated>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskUpdated&&(identical(other.index, index) || other.index == index)&&(identical(other.newTask, newTask) || other.newTask == newTask));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskEvent$TaskUpdated&&(identical(other.index, index) || other.index == index)&&(identical(other.newTask, newTask) || other.newTask == newTask));
 }
 
 
@@ -219,8 +219,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $TaskUpdatedCopyWith<$Res> implements $TaskEventCopyWith<$Res> {
-  factory $TaskUpdatedCopyWith(TaskUpdated value, $Res Function(TaskUpdated) _then) = _$TaskUpdatedCopyWithImpl;
+abstract mixin class $TaskEvent$TaskUpdatedCopyWith<$Res> implements $TaskEventCopyWith<$Res> {
+  factory $TaskEvent$TaskUpdatedCopyWith(TaskEvent$TaskUpdated value, $Res Function(TaskEvent$TaskUpdated) _then) = _$TaskEvent$TaskUpdatedCopyWithImpl;
 @useResult
 $Res call({
  int index, Task newTask
@@ -231,17 +231,17 @@ $TaskCopyWith<$Res> get newTask;
 
 }
 /// @nodoc
-class _$TaskUpdatedCopyWithImpl<$Res>
-    implements $TaskUpdatedCopyWith<$Res> {
-  _$TaskUpdatedCopyWithImpl(this._self, this._then);
+class _$TaskEvent$TaskUpdatedCopyWithImpl<$Res>
+    implements $TaskEvent$TaskUpdatedCopyWith<$Res> {
+  _$TaskEvent$TaskUpdatedCopyWithImpl(this._self, this._then);
 
-  final TaskUpdated _self;
-  final $Res Function(TaskUpdated) _then;
+  final TaskEvent$TaskUpdated _self;
+  final $Res Function(TaskEvent$TaskUpdated) _then;
 
 /// Create a copy of TaskEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? index = null,Object? newTask = null,}) {
-  return _then(TaskUpdated(
+  return _then(TaskEvent$TaskUpdated(
 null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,null == newTask ? _self.newTask : newTask // ignore: cast_nullable_to_non_nullable
 as Task,
