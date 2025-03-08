@@ -5,7 +5,7 @@ part 'task_state.freezed.dart';
 part 'task_state.g.dart';
 
 @freezed
-class TaskState with _$TaskState {
+sealed class TaskState with _$TaskState {
   const factory TaskState({@Default([]) List<Task> tasks}) = _TaskState;
 
   factory TaskState.fromJson(Map<String, dynamic> json) =>

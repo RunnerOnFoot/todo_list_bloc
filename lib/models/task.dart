@@ -4,7 +4,7 @@ part 'task.freezed.dart';
 part 'task.g.dart';
 
 @freezed
-class Task with _$Task {
+sealed class Task with _$Task {
   const factory Task({required String name, @Default(false) bool isDone}) =
       _Task;
 
