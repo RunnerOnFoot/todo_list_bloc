@@ -29,8 +29,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<TaskBloc>(), // Inject TaskBloc with GetIt
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<TaskBloc>(),
+        ), // Inject TaskBloc with GetIt
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
