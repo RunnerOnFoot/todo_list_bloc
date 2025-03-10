@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
-import 'theme_addon.dart' as custom;
+import 'addons/theme_addon.dart' as custom;
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
 import 'main.directories.g.dart';
