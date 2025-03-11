@@ -1,4 +1,4 @@
-import 'package:to_do_list_bloc/models/task.dart';
+import 'package:to_do_list_bloc/domain/entities/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_state.freezed.dart';
