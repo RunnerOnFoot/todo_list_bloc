@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_list_bloc/domain/usecases/add_task.dart';
 import 'package:to_do_list_bloc/domain/usecases/remove_task.dart';
@@ -6,6 +7,7 @@ import '../../domain/entities/task.dart';
 import 'task_event.dart';
 import 'task_state.dart';
 
+@injectable
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final AddTask addTask;
   final RemoveTask removeTask;
