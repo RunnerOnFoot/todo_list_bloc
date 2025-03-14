@@ -1,0 +1,21 @@
+flutter_native_splash:
+  # Background color for the splash screen
+  color: "#000000"
+  image: assets/images/logo.png
+
+  # Enable for Android and iOS and Web
+  android: true
+  ios: true
+  web: true
+
+  # Full-screen mode (hides status bar)
+  fullscreen: true
+
+  # Android 12 specific settings
+  android_12:
+    image: assets/images/logo.png
+    icon_background_color: "#000000"
+
+  # Dark mode support
+  color_dark: "#121212"
+  image_dark: assets/images/logo.png

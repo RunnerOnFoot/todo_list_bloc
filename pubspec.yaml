@@ -22,6 +22,8 @@ dependencies:
   json_serializable: ^6.9.4
   get_it: ^8.0.3
   injectable: ^2.5.0
+  google_fonts: ^6.2.1
+  flutter_native_splash: ^2.4.5
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +38,6 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/images/
