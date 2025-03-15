@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:to_do_list_bloc/presentation/screens/add_task/add_task_modal_screen.dart';
 import 'package:to_do_list_bloc/presentation/screens/task_home/task_home_screen.dart';
 import 'package:to_do_list_bloc/service_locator.dart';
+import 'core/theme/app_theme.dart';
 import 'presentation/blocs/task_bloc.dart';
 import 'presentation/screens/task_list/task_list_screen.dart';
 import 'presentation/screens/task_edit/task_edit_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: appThemeData(),
         initialRoute: '/home',
         routes: {
           '/': (context) => const TaskListScreen(),

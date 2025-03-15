@@ -3,7 +3,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../widgets/common/custom_bottom_nav.dart';
 import '../../widgets/common/task_empty_state.dart';
-import '../add_task/add_task_modal_screen.dart'; // Import the modal screen widget
+import '../add_task/add_task_modal_screen.dart';
 
 class TaskHomeScreen extends StatefulWidget {
   const TaskHomeScreen({super.key});
