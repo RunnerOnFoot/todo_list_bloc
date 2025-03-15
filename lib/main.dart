@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:to_do_list_bloc/presentation/screens/home_screen_empty.dart';
-import 'package:to_do_list_bloc/presentation/screens/task_home_screen.dart';
+import 'package:to_do_list_bloc/presentation/screens/add_task/add_task_screen.dart';
+import 'package:to_do_list_bloc/presentation/screens/task_home/task_home_screen.dart';
 import 'package:to_do_list_bloc/service_locator.dart';
 import 'presentation/blocs/task_bloc.dart';
-import 'presentation/screens/task_list_screen.dart';
-import 'presentation/screens/task_edit_screen.dart';
+import 'presentation/screens/task_list/task_list_screen.dart';
+import 'presentation/screens/task_edit/task_edit_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future<void> main() async {
@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const TaskListScreen(),
           '/home': (context) => const TaskHomeScreen(),
           '/edit': (context) => const TaskEditScreen(),
+          '/add': (context) => const AddTaskScreen(),
         },
       ),
     );

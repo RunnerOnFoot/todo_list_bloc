@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/app_text_styles.dart';
-import '../theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../../../core/theme/app_colors.dart';
 
 class NavItem extends StatelessWidget {
   final IconData icon;
@@ -23,6 +23,7 @@ class NavItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(10),
         splashColor: AppColors.primaryPurple.withOpacity(0.3),
+        highlightShape: BoxShape.rectangle,
         containedInkWell: true,
         child: Column(
           mainAxisSize: MainAxisSize.min,

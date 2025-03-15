@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/task_bloc.dart';
-import '../blocs/task_event.dart';
-import '../blocs/task_state.dart';
+import '../../blocs/task_bloc.dart';
+import '../../blocs/task_event.dart';
+import '../../blocs/task_state.dart';
 
 class TaskListScreen extends StatelessWidget {
   const TaskListScreen({super.key});

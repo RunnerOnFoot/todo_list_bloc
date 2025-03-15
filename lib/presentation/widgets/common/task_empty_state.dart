@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_text_styles.dart';
+import '../../../core/theme/app_text_styles.dart';
 
 class TaskEmptyState extends StatelessWidget {
   const TaskEmptyState({super.key});

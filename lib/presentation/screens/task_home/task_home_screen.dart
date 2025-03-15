@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
-import '../widgets/task_empty_state.dart';
-import '../widgets/custom_bottom_nav.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../../widgets/common/task_empty_state.dart';
+import '../../widgets/common/custom_bottom_nav.dart';
 
 class TaskHomeScreen extends StatefulWidget {
   const TaskHomeScreen({super.key});
@@ -25,7 +25,9 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
         backgroundColor: AppColors.primaryPurple,
         shape: const CircleBorder(),
         child: const Icon(Icons.add, size: 30, color: Colors.white),

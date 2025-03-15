@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/task_bloc.dart';
-import '../blocs/task_event.dart';
+import '../../blocs/task_bloc.dart';
+import '../../blocs/task_event.dart';
 import 'package:to_do_list_bloc/domain/entities/task.dart';
 
 class TaskEditScreen extends StatefulWidget {
