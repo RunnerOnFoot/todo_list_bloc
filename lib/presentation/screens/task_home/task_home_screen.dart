@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../blocs/task_bloc.dart';
+import '../../blocs/task_state.dart';
+import '../../blocs/task_event.dart';
 import '../../widgets/common/custom_bottom_nav.dart';
 import '../../widgets/common/task_empty_state.dart';
 import '../../widgets/common/task_header.dart';
@@ -8,8 +11,6 @@ import '../../widgets/common/task_search_bar.dart';
 import '../../widgets/common/section_title.dart';
 import '../../widgets/task/task_item.dart';
 import '../add_task/add_task_modal_screen.dart';
-import '../../blocs/task_bloc.dart';
-import '../../blocs/task_state.dart';
 
 class TaskHomeScreen extends StatefulWidget {
   const TaskHomeScreen({super.key});
@@ -50,7 +51,7 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
     );
   }
 
-  // Example helper to determine a color for a category
+  // Example: mapping a category to a color
   Color _getCategoryColor(String category) {
     switch (category) {
       case 'University':
@@ -64,24 +65,27 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
     }
   }
 
-  // Build the task list using the reusable TaskItem widget.
-  Widget _buildTaskList(List tasks) {
-    if (tasks.isEmpty) {
-      return const TaskEmptyState();
-    }
+  // Build a ListView of tasks
+  Widget _buildTaskList(List allTasks, List filteredTasks) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: tasks.length,
+      itemCount: filteredTasks.length,
       itemBuilder: (context, index) {
-        final task = tasks[index];
+        final task = filteredTasks[index];
+        final realIndex = allTasks.indexOf(task);
+
         return TaskItem(
           title: task.name,
-          time: 'Now', // You can adjust this if you have a time property
+          time: 'Now',
           isCompleted: task.isDone,
-          // For this example, we assume that the Task entity has no category,
-          // but if you add one, you can pass it here.
           getCategoryColor: _getCategoryColor,
+          onToggle: () {
+            // Toggle isDone on tap
+            context.read<TaskBloc>().add(
+              TaskEvent.updated(realIndex, task.copyWith(isDone: !task.isDone)),
+            );
+          },
         );
       },
     );
@@ -90,11 +94,11 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // We do NOT hide the status bar anywhere, so it stays visible.
       backgroundColor: AppColors.backgroundColor,
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTaskModal,
         backgroundColor: AppColors.primaryPurple,
-        shape: const CircleBorder(),
         child: const Icon(Icons.add, size: 30, color: AppColors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -105,17 +109,58 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
       body: SafeArea(
         child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, state) {
+            final allTasks = state.tasks;
+            final activeTasks = allTasks.where((t) => !t.isDone).toList();
+            final completedTasks = allTasks.where((t) => t.isDone).toList();
+
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Always show header and search bar
                   const TaskHeader(
                     title: 'Index',
                     profileImagePath: 'assets/images/profile_pic.jpg',
                   ),
                   const TaskSearchBar(),
-                  const SectionTitle(title: 'Tasks'),
-                  _buildTaskList(state.tasks),
+
+                  // If NO tasks at all, show one big empty state
+                  if (allTasks.isEmpty) ...[
+                    const SizedBox(height: 50),
+                    const Center(child: TaskEmptyState()),
+                    const SizedBox(height: 50),
+                  ] else ...[
+                    // Otherwise, show "Today" and "Completed" sections
+                    const SectionTitle(title: 'Today'),
+                    if (activeTasks.isEmpty)
+                      // Show a smaller placeholder for empty active tasks
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Center(
+                          child: Text(
+                            'No tasks for today.',
+                            style: TextStyle(color: Colors.white54),
+                          ),
+                        ),
+                      )
+                    else
+                      _buildTaskList(allTasks, activeTasks),
+
+                    const SectionTitle(title: 'Completed'),
+                    if (completedTasks.isEmpty)
+                      // Show a smaller placeholder for empty completed tasks
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Center(
+                          child: Text(
+                            'No completed tasks yet.',
+                            style: TextStyle(color: Colors.white54),
+                          ),
+                        ),
+                      )
+                    else
+                      _buildTaskList(allTasks, completedTasks),
+                  ],
                 ],
               ),
             );

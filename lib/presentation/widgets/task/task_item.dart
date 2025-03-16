@@ -6,7 +6,8 @@ class TaskItem extends StatelessWidget {
   final String? category;
   final String? count;
   final bool isCompleted;
-  final Color Function(String) getCategoryColor;
+  final Color Function(String)? getCategoryColor;
+  final VoidCallback? onToggle; // New callback for toggling task completion
 
   const TaskItem({
     super.key,
@@ -15,7 +16,8 @@ class TaskItem extends StatelessWidget {
     this.category,
     this.count,
     required this.isCompleted,
-    required this.getCategoryColor,
+    this.getCategoryColor,
+    this.onToggle,
   });
 
   @override
@@ -29,9 +31,13 @@ class TaskItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(
-            isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
-            color: isCompleted ? Colors.green : Colors.white54,
+          InkWell(
+            onTap: onToggle, // When tapped, calls the onToggle callback
+            borderRadius: BorderRadius.circular(16),
+            child: Icon(
+              isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
+              color: isCompleted ? Colors.green : Colors.white54,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -50,12 +56,12 @@ class TaskItem extends StatelessWidget {
               ],
             ),
           ),
-          if (category != null)
+          if (category != null && getCategoryColor != null)
             Container(
               margin: const EdgeInsets.only(right: 8),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: getCategoryColor(category!),
+                color: getCategoryColor!(category!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
