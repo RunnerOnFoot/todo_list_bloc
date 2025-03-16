@@ -99,6 +99,7 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTaskModal,
         backgroundColor: AppColors.primaryPurple,
+        shape: const CircleBorder(),
         child: const Icon(Icons.add, size: 30, color: AppColors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
