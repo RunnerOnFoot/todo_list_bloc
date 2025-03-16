@@ -6,14 +6,19 @@ class TaskEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset('assets/images/checklist.png'),
-        const SizedBox(height: 20),
-        Text('What do you want to do today?', style: AppTextStyles.mainTitle),
-        Text('Tap + to add your tasks', style: AppTextStyles.subtitle),
-      ],
+    return Center(
+      child: Column(
+        // Make sure the column wraps its content
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset('assets/images/checklist.png'),
+          const SizedBox(height: 20),
+          Text('What do you want to do today?', style: AppTextStyles.mainTitle),
+          Text('Tap + to add your tasks', style: AppTextStyles.subtitle),
+        ],
+      ),
     );
   }
 }
