@@ -22,7 +22,8 @@ class NavItem extends StatelessWidget {
       child: InkResponse(
         onTap: onTap,
         borderRadius: BorderRadius.circular(10),
-        splashColor: AppColors.primaryPurple.withOpacity(0.3),
+        splashColor: AppColors.primaryPurple.withValues(alpha: 0.3),
+
         highlightShape: BoxShape.rectangle,
         containedInkWell: true,
         child: Column(

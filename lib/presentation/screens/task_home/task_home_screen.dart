@@ -94,7 +94,6 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // We do NOT hide the status bar anywhere, so it stays visible.
       backgroundColor: AppColors.backgroundColor,
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTaskModal,
@@ -118,7 +117,6 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Always show header and search bar
                   const TaskHeader(
                     title: 'Index',
                     profileImagePath: 'assets/images/profile_pic.jpg',
