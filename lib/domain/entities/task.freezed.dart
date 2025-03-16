@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Task {
 
+ int? get id;// optional id
  String get name; bool get isDone;
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
@@ -29,16 +30,16 @@ $TaskCopyWith<Task> get copyWith => _$TaskCopyWithImpl<Task>(this as Task, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Task&&(identical(other.name, name) || other.name == name)&&(identical(other.isDone, isDone) || other.isDone == isDone));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Task&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.isDone, isDone) || other.isDone == isDone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,isDone);
+int get hashCode => Object.hash(runtimeType,id,name,isDone);
 
 @override
 String toString() {
-  return 'Task(name: $name, isDone: $isDone)';
+  return 'Task(id: $id, name: $name, isDone: $isDone)';
 }
 
 
@@ -49,7 +50,7 @@ abstract mixin class $TaskCopyWith<$Res>  {
   factory $TaskCopyWith(Task value, $Res Function(Task) _then) = _$TaskCopyWithImpl;
 @useResult
 $Res call({
- String name, bool isDone
+ int? id, String name, bool isDone
 });
 
 
@@ -66,9 +67,10 @@ class _$TaskCopyWithImpl<$Res>
 
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? isDone = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = null,Object? isDone = null,}) {
   return _then(_self.copyWith(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,isDone: null == isDone ? _self.isDone : isDone // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -81,9 +83,11 @@ as bool,
 @JsonSerializable()
 
 class _Task implements Task {
-  const _Task({required this.name, this.isDone = false});
+  const _Task({this.id, required this.name, this.isDone = false});
   factory _Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
+@override final  int? id;
+// optional id
 @override final  String name;
 @override@JsonKey() final  bool isDone;
 
@@ -100,16 +104,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Task&&(identical(other.name, name) || other.name == name)&&(identical(other.isDone, isDone) || other.isDone == isDone));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Task&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.isDone, isDone) || other.isDone == isDone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,isDone);
+int get hashCode => Object.hash(runtimeType,id,name,isDone);
 
 @override
 String toString() {
-  return 'Task(name: $name, isDone: $isDone)';
+  return 'Task(id: $id, name: $name, isDone: $isDone)';
 }
 
 
@@ -120,7 +124,7 @@ abstract mixin class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) _then) = __$TaskCopyWithImpl;
 @override @useResult
 $Res call({
- String name, bool isDone
+ int? id, String name, bool isDone
 });
 
 
@@ -137,9 +141,10 @@ class __$TaskCopyWithImpl<$Res>
 
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? isDone = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = null,Object? isDone = null,}) {
   return _then(_Task(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,isDone: null == isDone ? _self.isDone : isDone // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

@@ -11,6 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:to_do_list_bloc/core/di/drift_module.dart' as _i42;
+import 'package:to_do_list_bloc/data/local/drift_database.dart' as _i64;
 import 'package:to_do_list_bloc/data/repositories/task_repository_impl.dart'
     as _i130;
 import 'package:to_do_list_bloc/domain/repositories/task_repository.dart'
@@ -27,7 +29,11 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.lazySingleton<_i442.TaskRepository>(() => _i130.TaskRepositoryImpl());
+    final driftModule = _$DriftModule();
+    gh.lazySingleton<_i64.AppDatabase>(() => driftModule.database);
+    gh.lazySingleton<_i442.TaskRepository>(
+      () => _i130.TaskRepositoryImpl(gh<_i64.AppDatabase>()),
+    );
     gh.factory<_i1041.AddTask>(
       () => _i1041.AddTask(gh<_i442.TaskRepository>()),
     );
@@ -47,3 +53,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$DriftModule extends _i42.DriftModule {}
