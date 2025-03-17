@@ -9,4 +9,5 @@ sealed class TaskEvent with _$TaskEvent {
   const factory TaskEvent.removed(int index) = TaskEvent$TaskRemoved;
   const factory TaskEvent.updated(int index, Task newTask) =
       TaskEvent$TaskUpdated;
+  const factory TaskEvent.loadTasks() = TaskEvent$LoadTasks;
 }

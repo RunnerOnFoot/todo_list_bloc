@@ -11,12 +11,15 @@ class TaskRepositoryImpl implements TaskRepository {
   TaskRepositoryImpl(this.database);
 
   @override
-  Future<void> addTask(domain.Task task) async {
+  Future<domain.Task> addTask(domain.Task task) async {
     final taskCompanion = TasksCompanion.insert(
       name: task.name,
       isDone: Value(task.isDone),
     );
-    await database.insertTask(taskCompanion);
+    // The insertTask method returns the auto-generated id.
+    final id = await database.insertTask(taskCompanion);
+    // Return a copy of the task with the new id.
+    return task.copyWith(id: id);
   }
 
   @override
@@ -26,7 +29,8 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Future<void> updateTask(int id, domain.Task newTask) async {
-    // Create a Drift Task instance from the domain Task
+    // Create a Drift Task instance from newTask.
+    // Note: 'Task' here refers to the Drift-generated class (from drift_database.g.dart).
     final driftTask = Task(id: id, name: newTask.name, isDone: newTask.isDone);
     await database.updateTask(driftTask);
   }
@@ -34,7 +38,7 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<List<domain.Task>> getTasks() async {
     final driftTasks = await database.getAllTasks();
-    // Map each Drift Task to a domain.Task
+    // Map each Drift Task to a domain.Task.
     return driftTasks
         .map((t) => domain.Task(id: t.id, name: t.name, isDone: t.isDone))
         .toList();

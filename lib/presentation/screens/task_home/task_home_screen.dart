@@ -74,18 +74,26 @@ class _TaskHomeScreenState extends State<TaskHomeScreen> {
       itemBuilder: (context, index) {
         final task = filteredTasks[index];
         final realIndex = allTasks.indexOf(task);
-
-        return TaskItem(
-          title: task.name,
-          time: 'Now',
-          isCompleted: task.isDone,
-          getCategoryColor: _getCategoryColor,
-          onToggle: () {
-            // Toggle isDone on tap
-            context.read<TaskBloc>().add(
-              TaskEvent.updated(realIndex, task.copyWith(isDone: !task.isDone)),
-            );
+        return GestureDetector(
+          onLongPress: () {
+            // Dispatch a removal event when the user long-presses the task tile.
+            context.read<TaskBloc>().add(TaskEvent.removed(realIndex));
           },
+          child: TaskItem(
+            title: task.name,
+            time: 'Now', // Replace with a real time if available.
+            isCompleted: task.isDone,
+            getCategoryColor: _getCategoryColor,
+            onToggle: () {
+              // Toggle completion on tap.
+              context.read<TaskBloc>().add(
+                TaskEvent.updated(
+                  realIndex,
+                  task.copyWith(isDone: !task.isDone),
+                ),
+              );
+            },
+          ),
         );
       },
     );

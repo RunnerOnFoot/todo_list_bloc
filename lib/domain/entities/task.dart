@@ -6,7 +6,7 @@ part 'task.g.dart';
 @freezed
 sealed class Task with _$Task {
   const factory Task({
-    int? id, // optional id
+    int? id, // Make id nullable so new tasks can be created without it.
     required String name,
     @Default(false) bool isDone,
   }) = _Task;

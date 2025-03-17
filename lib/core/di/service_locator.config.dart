@@ -48,6 +48,7 @@ extension GetItInjectableX on _i174.GetIt {
         addTask: gh<_i1041.AddTask>(),
         removeTask: gh<_i424.RemoveTask>(),
         updateTask: gh<_i115.UpdateTask>(),
+        taskRepository: gh<_i442.TaskRepository>(),
       ),
     );
     return this;

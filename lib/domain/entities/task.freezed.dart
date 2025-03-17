@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Task {
 
- int? get id;// optional id
+ int? get id;// Make id nullable so new tasks can be created without it.
  String get name; bool get isDone;
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
@@ -87,7 +87,7 @@ class _Task implements Task {
   factory _Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
 @override final  int? id;
-// optional id
+// Make id nullable so new tasks can be created without it.
 @override final  String name;
 @override@JsonKey() final  bool isDone;
 
